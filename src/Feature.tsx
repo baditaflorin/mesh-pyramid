@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  MeshNameInput,
   PersonalQR,
   useQRScanner,
   makeScanPayload,
@@ -160,12 +161,11 @@ function Body({ room, config }: { room: YRoom; config: MeshConfig }) {
 
       <section className="pyr-me">
         <h2 className="pyr-section-title">your QR — show this for someone to scan</h2>
-        <input
+        <MeshNameInput
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={setName}
           placeholder="your name"
           maxLength={48}
-          aria-label="your name"
           className="pyr-name"
         />
         <div className="pyr-qr-wrap">
