@@ -19,7 +19,8 @@ test("paste-payload recruitment: B becomes A's downline; A counts 1 below", asyn
     // grab alice's payload from her own UI
     await a.locator(".pyr-payload summary").click();
     const payload = (await a.locator(".pyr-payload code").textContent()) ?? "";
-    expect(payload.startsWith("mesh://")).toBe(true);
+    // Real-URL QR payload (post 2026-05-17): native cameras can open it.
+    expect(payload).toMatch(/^https?:\/\/.+#r=.+&p=.+/);
 
     await b.getByPlaceholder("your name").fill("bob");
     await b.getByPlaceholder("paste a mesh:// payload").fill(payload);
@@ -41,5 +42,7 @@ test("personal QR is rendered and contains the room id encoded in the payload", 
   await page.getByPlaceholder("your name").fill("charlie");
   await expect(page.locator(".pyr-qr-wrap svg")).toBeVisible();
   await page.locator(".pyr-payload summary").click();
-  await expect(page.locator(".pyr-payload code")).toContainText("mesh://");
+  // QR payload is a real HTTPS-friendly URL with hash params now (May 2026).
+  await expect(page.locator(".pyr-payload code")).toContainText("r=");
+  await expect(page.locator(".pyr-payload code")).toContainText("p=");
 });
