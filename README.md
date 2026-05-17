@@ -12,6 +12,8 @@
 
 **Tip the dev (buy a coffee) → https://www.paypal.com/paypalme/florinbadita**
 
+**Security audit (programmatic, 22 checks) → [docs/security-audit.md](./docs/security-audit.md)**
+
 ---
 
 ![screenshot](docs/screenshot.png)
