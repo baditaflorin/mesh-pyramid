@@ -1,6 +1,6 @@
 {
   "app": "mesh-pyramid",
-  "completedAt": "2026-05-17T11:19:49.256Z",
+  "completedAt": "2026-05-17T13:26:57.818Z",
   "totalChecks": 22,
   "passed": 22,
   "failed": 0,
@@ -10,22 +10,22 @@
       "claim": "Identity key persists across reloads via localStorage",
       "method": "loadOrCreateIdentity called twice with same prefix; both keypairs match",
       "evidence": {
-        "pubkeyA": "73ab3691937ee7e54dfc2e6c2c3fcbb4c7d5a72d6205c4a5497040ef4e80ca2b",
-        "pubkeyB": "73ab3691937ee7e54dfc2e6c2c3fcbb4c7d5a72d6205c4a5497040ef4e80ca2b"
+        "pubkeyA": "1ded55119e0fe218ee12086142fe8910cf1cb93da3e2e6fb8bb55cdc5e6b6a6d",
+        "pubkeyB": "1ded55119e0fe218ee12086142fe8910cf1cb93da3e2e6fb8bb55cdc5e6b6a6d"
       },
       "result": "pass",
-      "ts": 1779016770895
+      "ts": 1779024400992
     },
     {
       "id": "L1.IDENTITY.uniquePerApp",
       "claim": "Each storagePrefix produces a distinct keypair (no cross-app reuse)",
       "method": "loadOrCreateIdentity with two different prefixes; private keys differ",
       "evidence": {
-        "pubkeyA": "3950f4478b1c3efb",
-        "pubkeyB": "cd7caaa497265149"
+        "pubkeyA": "04f2b9b39ff2179d",
+        "pubkeyB": "45d7e695390b5fb3"
       },
       "result": "pass",
-      "ts": 1779016770896
+      "ts": 1779024400994
     },
     {
       "id": "L1.MODERATOR.claimSyncs",
@@ -36,36 +36,36 @@
         "ttlMs": 1800000
       },
       "result": "pass",
-      "ts": 1779016770954
+      "ts": 1779024401052
     },
     {
       "id": "L1.MODERATOR.expiredClaimIgnored",
       "claim": "A signed claim with expiresAt in the past is treated as vacant",
       "method": "Plant claim with expiresAt = now - 60s; hook reports current=null",
       "evidence": {
-        "plantedExpiresAt": 1779016710988,
-        "now": 1779016770991
+        "plantedExpiresAt": 1779024341087,
+        "now": 1779024401090
       },
       "result": "pass",
-      "ts": 1779016770991
+      "ts": 1779024401090
     },
     {
       "id": "L1.MODERATOR.forgedClaimRejected",
       "claim": "A claim with a signature not matching its embedded pubkey is treated as vacant",
       "method": "Plant {pubkey:real, sig:forger}; hook rejects and reports current=null",
       "evidence": {
-        "realPubkey": "b43a1c6709457825",
-        "forgerPubkey": "48c92be65254b19e"
+        "realPubkey": "8eaa25fc541e53a8",
+        "forgerPubkey": "b10fa293f823db06"
       },
       "result": "pass",
-      "ts": 1779016770995
+      "ts": 1779024401093
     },
     {
       "id": "L1.MODERATOR.releaseSyncs",
       "claim": "Relinquish by the current moderator clears the slot for all peers",
       "method": "After A.relinquish() both A and B observe current=null",
       "result": "pass",
-      "ts": 1779016770988
+      "ts": 1779024401086
     },
     {
       "id": "L1.MODERATOR.signedClaim",
@@ -76,35 +76,35 @@
         "nonceLen": 32
       },
       "result": "pass",
-      "ts": 1779016770963
+      "ts": 1779024401061
     },
     {
       "id": "L1.MODERATOR.vacantDefault",
       "claim": "Fresh room reports no moderator and isMe=false",
       "method": "useModerator hook on a fresh mock room returns {current:null, isMe:false}",
       "result": "pass",
-      "ts": 1779016770931
+      "ts": 1779024401030
     },
     {
       "id": "L1.SIGN.rejectGarbage",
       "claim": "Invalid signature / pubkey inputs return false instead of crashing",
       "method": "verify({x:1}, 'not-hex', 'also-bad') and verify({x:1}, '', '') both false",
       "result": "pass",
-      "ts": 1779016770907
+      "ts": 1779024401005
     },
     {
       "id": "L1.SIGN.rejectTampered",
       "claim": "A signed payload with any byte modified fails verification",
       "method": "Sign {msg:'hello'}, then verify({msg:'HELLO'}, …) returns false",
       "result": "pass",
-      "ts": 1779016770903
+      "ts": 1779024401001
     },
     {
       "id": "L1.SIGN.rejectWrongKey",
       "claim": "A's signature does not verify under B's public key",
       "method": "Sign with kpA.priv, verify with kpB.pub returns false",
       "result": "pass",
-      "ts": 1779016770907
+      "ts": 1779024401004
     },
     {
       "id": "L1.SIGN.roundtrip",
@@ -112,30 +112,30 @@
       "method": "Ed25519 sign(payload, privkey) then verify(payload, sig, pubkey)",
       "evidence": {
         "sigLen": 128,
-        "pubkeyPrefix": "72606dfc1efebde2"
+        "pubkeyPrefix": "306aec1028527f0c"
       },
       "result": "pass",
-      "ts": 1779016770900
+      "ts": 1779024400997
     },
     {
       "id": "L1.TOFU.fingerprint",
       "claim": "trustFingerprint emits a 4x2-hex grouped string for in-person verification",
       "method": "fingerprint(peerId, pubkey) matches /^xx-xx-xx-xx$/",
       "evidence": {
-        "fingerprint": "67-df-b3-b4"
+        "fingerprint": "e8-b7-c8-06"
       },
       "result": "pass",
-      "ts": 1779016770909
+      "ts": 1779024401006
     },
     {
       "id": "L1.TOFU.peerIdFromPubkey",
       "claim": "peerIdFromPubkey is deterministic and uses 64-bit prefix of pubkey",
       "method": "Two calls with same pubkey return the same 16-hex-char id",
       "evidence": {
-        "peerId": "12c76f5400f90c99"
+        "peerId": "49e62e43c7028bde"
       },
       "result": "pass",
-      "ts": 1779016770908
+      "ts": 1779024401005
     },
     {
       "id": "L1.TOFU.register",
@@ -143,36 +143,36 @@
       "method": "Verify the stored record's signature against its own pubkey",
       "evidence": {
         "peerId": "alice",
-        "pubkeyPrefix": "c15e169087710eac",
+        "pubkeyPrefix": "d7e464caa7abf5dc",
         "sigLen": 128
       },
       "result": "pass",
-      "ts": 1779016770921
+      "ts": 1779024401019
     },
     {
       "id": "L1.TOFU.rejectImposter",
       "claim": "A forged record signed by the wrong key does not block the real peer from publishing",
       "method": "Pre-write mallory-signed alice claim; alice arrives and overwrites with her own",
       "evidence": {
-        "forgedPubkey": "272ddf1ed3f5a45a",
-        "realPubkey": "a779addf3f9992f9"
+        "forgedPubkey": "35298f01fbe31588",
+        "realPubkey": "e97173606deed357"
       },
       "result": "pass",
-      "ts": 1779016770930
+      "ts": 1779024401028
     },
     {
       "id": "UI.MODERATOR.claimSyncs",
       "claim": "A's claim becomes visible to B with the correct is-me / is-active classes",
       "method": "Click claim on A, assert A shows 'you're moderating' and B shows 'is moderating'",
       "result": "pass",
-      "ts": 1779016782374
+      "ts": 1779024410971
     },
     {
       "id": "UI.MODERATOR.countdownShown",
       "claim": "After claiming, the UI shows an auto-clear timer in 'Xm SSs' form near 30m",
       "method": "Assert .mesh-mod text matches /auto-clears in (29|30)m \\d{2}s/",
       "result": "pass",
-      "ts": 1779016783950
+      "ts": 1779024412544
     },
     {
       "id": "UI.MODERATOR.honestyLabels",
@@ -182,31 +182,31 @@
         "sample": "🛡you're moderatingauto-clears in 29m 59s · soft role, not enforcementrelease"
       },
       "result": "pass",
-      "ts": 1779016787161
+      "ts": 1779024415723
     },
     {
       "id": "UI.MODERATOR.identityStable",
       "claim": "After reload + re-claim, the same Ed25519 pubkey signs the new claim (TOFU stays pinned)",
       "method": "Read localStorage identity before/after reload + re-claim; pubkeys match",
       "evidence": {
-        "pubkeyPrefix": "87d9e1b8d0016ec5"
+        "pubkeyPrefix": "33ae79480c234318"
       },
       "result": "pass",
-      "ts": 1779016789197
+      "ts": 1779024417760
     },
     {
       "id": "UI.MODERATOR.releaseClearsBoth",
       "claim": "Release by the holding peer returns both peers to vacant",
       "method": "After claim → release on A, both .mesh-mod read 'no moderator'",
       "result": "pass",
-      "ts": 1779016785610
+      "ts": 1779024414170
     },
     {
       "id": "UI.MODERATOR.vacantOnLoad",
       "claim": "Both peers see 'no moderator — anyone can claim' on first load",
       "method": "Open two pages with no prior state; assert .mesh-mod shows 'no moderator'",
       "result": "pass",
-      "ts": 1779016780656
+      "ts": 1779024409324
     }
   ]
 }
