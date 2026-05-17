@@ -4,6 +4,9 @@ import {
   useQRScanner,
   makeScanPayload,
   parseScanPayload,
+  useIdentity,
+  useModerator,
+  ModeratorBadge,
   type MeshConfig,
   type YRoom,
 } from "@baditaflorin/mesh-common";
@@ -33,6 +36,10 @@ function Body({ room, config }: { room: YRoom; config: MeshConfig }) {
   const [pasteInput, setPasteInput] = useState("");
   const [showScanner, setShowScanner] = useState(false);
   const [, rerender] = useState(0);
+
+  // Layer-1 security: stable Ed25519 identity + 30-min auto-expire moderator
+  const identity = useIdentity(config.storagePrefix);
+  const moderator = useModerator(room, config.storagePrefix, identity);
 
   useEffect(() => {
     if (name) localStorage.setItem(NAME_KEY(config.storagePrefix), name);
@@ -148,6 +155,8 @@ function Body({ room, config }: { room: YRoom; config: MeshConfig }) {
           )}
         </p>
       </header>
+
+      <ModeratorBadge state={moderator} resolveName={(peerId) => members.get(peerId)?.name} />
 
       <section className="pyr-me">
         <h2 className="pyr-section-title">your QR — show this for someone to scan</h2>
