@@ -1,7 +1,7 @@
 # mesh-pyramid
 
 [![pages](https://img.shields.io/badge/live-baditaflorin.github.io%2Fmesh-pyramid-fb7185)](https://baditaflorin.github.io/mesh-pyramid/)
-[![version](https://img.shields.io/badge/version-0.1.0-blue)](https://github.com/baditaflorin/mesh-pyramid/blob/main/package.json)
+[![version](https://img.shields.io/badge/version-0.1.1-blue)](https://github.com/baditaflorin/mesh-pyramid/blob/main/package.json)
 [![license](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 
 > Watch your downline grow — scan a QR to recruit, see your tree fanout in real time
